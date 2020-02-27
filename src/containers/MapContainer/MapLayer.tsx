@@ -4,7 +4,7 @@ import { useMapInstance, GeoJSON } from '@datapunt/react-maps';
 import { useDispatch, useSelector } from 'react-redux';
 import layersReader from 'services/layer-aggregator/layersReader';
 import { CATEGORY_NAMES } from 'shared/configuration/categories';
-import { addLayerDataActionCreator, removeLayerDataActionCreator, MapState } from './MapContainerDucks';
+import { addLayerDataActionCreator, removeLayerDataActionCreator, MapState } from './MapDucks';
 
 interface MapLayerProps {
   options: any;

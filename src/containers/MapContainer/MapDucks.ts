@@ -22,10 +22,10 @@ export function removeLayerDataActionCreator(names: string[]) {
   };
 }
 
-export function selectLayerItemActionCreator(name?: string, item?: any) {
+export function selectLayerItemActionCreator(payload?: { name?: string, item?: any}) {
   return {
     type: SELECT_LAYER_ITEM,
-    payload: { name, item },
+    payload,
   };
 }
 

@@ -5,7 +5,7 @@ import { MarkerClusterGroupOptions } from 'leaflet';
 import layersReader from 'services/layer-aggregator/layersReader';
 import queryStringParser from '../../shared/services/auth/services/query-string-parser';
 import LAYERS_CONFIG, { getPointOptions } from '../../services/layer-aggregator/layersConfig';
-import { addLayerDataActionCreator, removeLayerDataActionCreator } from './MapContainerDucks';
+import { addLayerDataActionCreator, removeLayerDataActionCreator } from './MapDucks';
 import MarkersCluster, { MarkerClusterData } from '../../components/MarkerCluster/MarkersCluster';
 
 const clusterLayerOptions: MarkerClusterGroupOptions = {

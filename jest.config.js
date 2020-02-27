@@ -1,5 +1,7 @@
 module.exports = {
   verbose: false,
+  rootDir: './',
+  collectCoverage: true,
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.test.{js,jsx,ts,tsx}',
@@ -27,7 +29,7 @@ module.exports = {
       '<rootDir>/internals/mocks/image.js',
   },
   setupFilesAfterEnv: ['<rootDir>/internals/testing/test-bundler.js'],
-  testRegex: '.*\\.test\\.(j|s)s$',
+  testRegex: '.*\\.test\\.(j|t)s$',
   testEnvironment: './internals/testing/jest-environment-jsdom-global-fix',
   snapshotSerializers: ['enzyme-to-json/serializer'],
 };
