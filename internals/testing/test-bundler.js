@@ -1,21 +1,25 @@
 import '@testing-library/jest-dom/extend-expect';
+import L from 'leaflet-headless';
 import 'core-js/shim';
 import 'regenerator-runtime';
 import 'raf/polyfill';
 import 'jest-localstorage-mock';
-import 'leaflet-headless';
 
 import Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
+global.fetch = require('jest-fetch-mock');
+
 // React 16 Enzyme adapter
 Enzyme.configure({ adapter: new Adapter() });
 
-// add leaflet
-global.L = L
+global.window.L = L;
+global.window.alert = msg => msg;
 
-// Mock the window.fetch function
-global.fetch = require('jest-fetch-mock')
+if (process.env.CI) {
+  // prevent pollution of the build log when running tests in CI
+  global.console.warn = () => {};
+}
 
 /**
  * Element.closest() polyfill

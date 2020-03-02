@@ -35,7 +35,7 @@
     "test:clean": "rimraf ./coverage",
     "test": "cross-env NODE_ENV=development jest",
     "test:coverage": "cross-env NODE_ENV=test jest --coverage",
-    "test:watch": "cross-env NODE_ENV=test jest --watchAll"
+    "test:watch": "cross-env NODE_ENV=test jest --watchAll --coverage"
   },
   "dllPlugin": {
     "path": "node_modules/react-boilerplate-dlls",
@@ -196,6 +196,7 @@
     "pre-commit": "1.2.2",
     "prettier": "^1.19.1",
     "prettier-eslint": "^9.0.1",
+    "react-test-renderer": "^16.13.0",
     "redux-mock-store": "^1.5.4",
     "rimraf": "^3.0.2",
     "sass-loader": "^8.0.2",

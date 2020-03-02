@@ -16,7 +16,7 @@ interface PointClusterLayerProps {
   onItemSelected: Function
 };
 
-const transform = (results: any) =>
+export const transform = (results: any) =>
   results.reduce(
     (acc: any, { category, layer }: {category: string, layer: any}) =>
       layer.features.length
@@ -50,7 +50,7 @@ const PointClusterLayer: React.FC<PointClusterLayerProps> = ({ onItemSelected })
     state?.map?.layers.filter((l:any) => layerNames.current.includes(l.name) && state?.map?.legend[l.name]),
   );
 
-  const udpateSelection = () => {
+  const updateSelection = () => {
     if(!mapInstance) return
     const { id, source } = queryStringParser(location.search);
     mapInstance.eachLayer((f: any) => {
@@ -82,7 +82,7 @@ const PointClusterLayer: React.FC<PointClusterLayerProps> = ({ onItemSelected })
       setData(layerData);
       layerNames.current = [...Object.keys(layerData)];
       dispatch(addLayerDataActionCreator([...Object.values(layerData)]));
-      udpateSelection();
+      updateSelection();
     })();
     return () => {
       dispatch(removeLayerDataActionCreator([...layerNames.current]));

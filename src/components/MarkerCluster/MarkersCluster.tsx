@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { createLeafletComponent } from '@datapunt/react-maps';
 import L, { GeoJSONOptions, MarkerClusterGroupOptions } from 'leaflet';
 import { FeatureCollection } from 'geojson';
-
-const MarkerClusterGroup = createLeafletComponent('markerClusterGroup');
+import MarkerClusterGroup from './MarkerClusterGroup';
 
 export interface MarkerClusterData {
   [name: string]: FeatureCollection;
 }
 
-interface MarkersClusterProps {
+export interface MarkersClusterProps {
   clusterOptions: MarkerClusterGroupOptions;
   pointOptions: (name: string, onItemSelected: Function) =>  GeoJSONOptions;
   data: MarkerClusterData;
@@ -18,7 +16,6 @@ interface MarkersClusterProps {
 
 const MarkersCluster: React.FC<MarkersClusterProps> = ({ clusterOptions, data, pointOptions, onItemSelected }) => {
   const [layerInstance, setLayerInstance] = useState();
-
   useEffect(() => {
     if (layerInstance) {
       layerInstance.clearLayers();

@@ -29,7 +29,7 @@ module.exports = {
       '<rootDir>/internals/mocks/image.js',
   },
   setupFilesAfterEnv: ['<rootDir>/internals/testing/test-bundler.js'],
-  testRegex: '.*\\.test\\.(j|t)s$',
+  testRegex: '.*\\.test\\.(j|t)sx?$',
   testEnvironment: './internals/testing/jest-environment-jsdom-global-fix',
   snapshotSerializers: ['enzyme-to-json/serializer'],
 };
