@@ -15,7 +15,7 @@ import DeviceDetails from 'components/DeviceDetails';
 import Geocoder, { getSuggestions, getAddressById } from 'components/Geocoder';
 import { Zoom } from '@datapunt/amsterdam-react-maps/lib/components';
 import { POLYGON_LAYERS_CONFIG, getPolygonOptions } from '../../services/layer-aggregator/layersConfig';
-import reducer, { selectLayerItemActionCreator, toggleMapLayerActionCreator, MapState } from './MapDucks';
+import reducer, { selectLayerItemActionCreator, toggleLayerActionCreator, MapState } from './MapDucks';
 import { CATEGORY_NAMES } from '../../shared/configuration/categories';
 import useHighlight from './hooks/useHighlight';
 import PointClusterLayer from './PointClusterLayer';
@@ -83,7 +83,7 @@ const MapContainer = () => {
   };
 
   const handleToggleCategory = (name: string) => {
-    dispatch(toggleMapLayerActionCreator(name));
+    dispatch(toggleLayerActionCreator(name));
   };
 
   const handleItemSelected = (name: string, feature: any, element: HTMLElement, queryString?: string) => {

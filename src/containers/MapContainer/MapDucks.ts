@@ -5,7 +5,7 @@ import { ActionType } from '../../utils/types';
 export const ADD_LAYER_DATA = 'src/containers/MapContainer/ADD_LAYER_DATA';
 export const REMOVE_LAYER_DATA = 'src/containers/MapContainer/REMOVE_LAYER_DATA';
 export const SELECT_LAYER_ITEM = 'src/containers/MapContainer/SELECT_LAYER_ITEM';
-export const TOGGLE_MAP_LAYER = 'src/containers/MapContainer/TOGGLE_MAP_LAYER';
+export const TOGGLE_LAYER = 'src/containers/MapContainer/TOGGLE_LAYER';
 
 // action creators
 export function addLayerDataActionCreator(layers: any[]) {
@@ -29,9 +29,9 @@ export function selectLayerItemActionCreator(payload?: { name?: string, item?: a
   };
 }
 
-export function toggleMapLayerActionCreator(name: string) {
+export function toggleLayerActionCreator(name: string) {
   return {
-    type: TOGGLE_MAP_LAYER,
+    type: TOGGLE_LAYER,
     payload: name,
   };
 }
@@ -81,7 +81,7 @@ function mapReducer(state = initialState, action: ActionType<any>) {
       return { ...state, selectedLayer: name, selectedItem: item };
     }
 
-    case TOGGLE_MAP_LAYER: {
+    case TOGGLE_LAYER: {
       const name = action.payload;
       return {
         ...state,
