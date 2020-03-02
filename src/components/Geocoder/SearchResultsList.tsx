@@ -1,11 +1,11 @@
-import React, { useCallback } from 'react'
-import 'leaflet/dist/leaflet.css'
-import { Link } from '@datapunt/asc-ui'
-import styled from '@datapunt/asc-core'
-import SearchResultsListStyle from './SearchResultsListStyle'
+import React, { useCallback } from 'react';
+import 'leaflet/dist/leaflet.css';
+import { Link } from '@datapunt/asc-ui';
+import styled from '@datapunt/asc-core';
+import SearchResultsListStyle from './SearchResultsListStyle';
 
 interface Active {
-  active?: boolean
+  active?: boolean;
 }
 
 const StyledLink = styled(Link)<Active>`
@@ -16,9 +16,17 @@ const StyledLink = styled(Link)<Active>`
     font-weight: 700;
     cursor: pointer;
   }
-`
+`;
 
-const SearchResultsListItem = ({
+export interface SearchResultsListItemProps {
+  id: string;
+  name: string;
+  selected: boolean;
+  index: number;
+  onSelect: Function;
+}
+
+export const SearchResultsListItem: React.FC<SearchResultsListItemProps> = ({
   id,
   name,
   selected,
@@ -26,24 +34,29 @@ const SearchResultsListItem = ({
   onSelect,
 }: any) => (
   <li>
-    <StyledLink
-      id={id}
-      active={index === selected}
-      variant="blank"
-      onClick={() => onSelect(index)}
-    >
+    <StyledLink id={id} active={index === selected} variant="blank" onClick={() => onSelect(index)}>
       {name}
     </StyledLink>
   </li>
-)
+);
 
-const SearchResultsList = ({ items, selected, onSelect }: any) => {
+export interface ListItem {
+  id: string;
+  name: string;
+}
+export interface SearchResultsListProps {
+  items: ListItem[];
+  selected: boolean;
+  onSelect: Function;
+}
+
+const SearchResultsList: React.FC<SearchResultsListProps> = ({ items, selected, onSelect }: any) => {
   const handleSelectedLink = useCallback(
     index => {
-      onSelect(index)
+      onSelect(index);
     },
     [onSelect],
-  )
+  );
 
   return (
     items && (
@@ -63,7 +76,7 @@ const SearchResultsList = ({ items, selected, onSelect }: any) => {
         </ul>
       </SearchResultsListStyle>
     )
-  )
-}
+  );
+};
 
-export default SearchResultsList
+export default SearchResultsList;

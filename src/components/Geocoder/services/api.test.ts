@@ -1,3 +1,4 @@
+import 'jest-fetch-mock';
 import { getSuggestions, getAddressById } from './api';
 
 const searchResult = {
@@ -27,12 +28,12 @@ const addressResult = {
 
 describe('Name of the group', () => {
   beforeEach(() => {
-    fetch.resetMocks();
+    global.fetch.resetMocks();
   });
 
   describe('getSuggestions', () => {
     it('should call the service and convert the data', async () => {
-      fetch.mockResponse(JSON.stringify({ response: searchResult }));
+      global.fetch.mockResponse(JSON.stringify({ response: searchResult }));
       const result = await getSuggestions('serch-term');
       expect(fetch).toHaveBeenCalledTimes(1);
       expect(result).toHaveLength(3);
@@ -41,7 +42,7 @@ describe('Name of the group', () => {
 
   describe('getAddressById', () => {
     it('should return the location of the addres ', async () => {
-      fetch.mockResponse(JSON.stringify({ response: addressResult }));
+      global.fetch.mockResponse(JSON.stringify({ response: addressResult }));
       const result = await getAddressById('addres-id');
       expect(fetch).toHaveBeenCalledTimes(1);
       expect(result).toEqual({ lat: 52.37821877, lon: 4.8832648 });

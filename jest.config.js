@@ -5,6 +5,7 @@ module.exports = {
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.test.{js,jsx,ts,tsx}',
+    '!src/**/*Style.{js,jsx,ts,tsx}',
     '!src/*/RbGenerated*/*.{js,jsx,ts,tsx}',
     '!src/app.tsx',
     '!src/global-styles.js',

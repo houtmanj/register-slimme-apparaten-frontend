@@ -20,7 +20,13 @@ const inputProps: any = {
   autoCorrect: 'off',
 };
 
-const Geocoder = ({ placeholder, getSuggestions, getAddressById, ...otherProps }: any) => {
+export interface GeocoderProps {
+  placeholder: string;
+  getSuggestions: Function;
+  getAddressById: Function;
+}
+
+const Geocoder: React.FC<GeocoderProps> = ({ placeholder, getSuggestions, getAddressById, ...otherProps }) => {
   const mapInstance = useMapInstance();
   const [{ term, results, index, searchMode }, dispatch] = useReducer(reducer, initialState);
   const [markerLocation, setMarkerLocation] = useState();
@@ -43,6 +49,7 @@ const Geocoder = ({ placeholder, getSuggestions, getAddressById, ...otherProps }
     } else {
       (async () => {
         const suggestions = await getSuggestions(term);
+        console.log(suggestions);
         dispatch(searchResultsChanged(suggestions));
       })();
     }
@@ -119,6 +126,7 @@ const Geocoder = ({ placeholder, getSuggestions, getAddressById, ...otherProps }
         onChange={handleOnChange}
         onKeyDown={handleKeyDown}
         value={term}
+        data-testid="search-bar"
       />
       <SearchResultsList items={results} selected={index} onSelect={onSelect} />
     </GeocoderStyle>

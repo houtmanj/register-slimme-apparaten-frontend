@@ -2,8 +2,8 @@
   "compilerOptions": {
     "strict": true,
     "jsx": "react",
-    "allowJs": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "noImplicitAny": false
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
