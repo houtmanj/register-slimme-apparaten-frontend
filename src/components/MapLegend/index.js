@@ -10,6 +10,7 @@ import MapLayersIcon from '../../images/icon-map-layers.svg';
 
 import './style.scss';
 
+
 class MapLegend extends React.Component {
   constructor(props) {
     super(props);
@@ -46,7 +47,7 @@ class MapLegend extends React.Component {
         <button
           type="button"
           className="map-legend__header"
-          onClick={() => this.setState({ isLegendVisible: !this.state.isLegendVisible })}
+          onClick={() => this.setState(prevState => ({ isLegendVisible: !prevState.isLegendVisible }))}
           title={this.state.isLegendVisible ? 'Kaartlagen verbergen' : 'Kaartlagen tonen'}
         >
           <MapLayersIcon className="map-legend__header-icon" />
