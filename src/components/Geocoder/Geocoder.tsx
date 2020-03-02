@@ -11,7 +11,7 @@ import {
   resultSelected,
   searchTermChanged,
   initialState,
-} from './ducks';
+} from './GeocoderDucks';
 import GeocoderStyle from './GeocoderStyle';
 
 const inputProps: any = {
