@@ -3,31 +3,37 @@ import React from 'react';
 import {
   Accordion as AccesibleAccordion,
   AccordionItem,
-  AccordionItemTitle,
-  AccordionItemBody,
+  AccordionItemHeading,
+  AccordionItemPanel,
+  AccordionItemButton,
+  AccordionItemState,
 } from 'react-accessible-accordion';
 
 import CarretRightIcon from '../../images/icon-carret-right.svg';
 
 import './style.scss';
 
-
-const Accordion = props => {
-  const Tag = props.headingLevel;
+const Accordion = ({ headingLevel, className, title, children }) => {
+  const Tag = headingLevel;
   return (
-    <AccesibleAccordion className={props.className}>
-      <AccordionItem
-        expanded={props.expanded}
-        className="c-accordion c-accordion--light"
-        hideBodyClassName="c-accordion--closed"
-      >
-        <AccordionItemTitle className="c-accordion__toggle">
-          <CarretRightIcon className="c-accordion__toggle-icon" />
-          <Tag className="c-accordion__toggle-title">{props.title}</Tag>
-        </AccordionItemTitle>
-        <AccordionItemBody className="c-accordion__content">
-          {props.children}
-        </AccordionItemBody>
+    <AccesibleAccordion className={className} allowZeroExpanded>
+      <AccordionItem className="c-accordion c-accordion--light ">
+        <AccordionItemHeading className="c-accordion__toggle">
+          <AccordionItemButton>
+            <AccordionItemState>
+              {({ expanded }) => <CarretRightIcon className={`c-accordion__toggle-icon ${expanded ? '' : 'c-accordion--closed'}`} />}
+            </AccordionItemState>
+            <Tag className="c-accordion__toggle-title">{title}</Tag>
+          </AccordionItemButton>
+        </AccordionItemHeading>
+        <AccordionItemState>
+          {({ expanded }) => (
+            <AccordionItemPanel className="c-accordion__content">
+              {expanded}
+              {children}
+            </AccordionItemPanel>
+          )}
+        </AccordionItemState>
       </AccordionItem>
     </AccesibleAccordion>
   );
@@ -40,7 +46,6 @@ Accordion.defaultProps = {
 Accordion.propTypes = {
   className: PropTypes.string,
   children: PropTypes.node.isRequired,
-  expanded: PropTypes.bool,
   headingLevel: PropTypes.string,
   title: PropTypes.string.isRequired,
 };
