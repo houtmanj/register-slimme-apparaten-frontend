@@ -3,7 +3,6 @@ import 'leaflet/dist/leaflet.css';
 import { SearchBar } from '@datapunt/asc-ui';
 import { useMapInstance } from '@datapunt/react-maps';
 import SearchResultsList from './SearchResultsList';
-import { nearestAdresToString } from './services/transformers';
 import {
   reducer,
   searchTermSelected,
@@ -21,7 +20,7 @@ const inputProps: any = {
   autoCorrect: 'off',
 };
 
-const Geocoder = ({ marker, clickPointInfo, placeholder, getSuggestions, getAddressById, ...otherProps }: any) => {
+const Geocoder = ({ placeholder, getSuggestions, getAddressById, ...otherProps }: any) => {
   const mapInstance = useMapInstance();
   const [{ term, results, index, searchMode }, dispatch] = useReducer(reducer, initialState);
   const [markerLocation, setMarkerLocation] = useState();
@@ -51,28 +50,18 @@ const Geocoder = ({ marker, clickPointInfo, placeholder, getSuggestions, getAddr
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [term]);
 
-  useEffect(() => {
-    if (!clickPointInfo) return;
-    const { location, nearestAdres } = clickPointInfo;
-    marker?.setLatLng(location);
-    marker?.setOpacity(1);
-    dispatch(searchTermSelected(nearestAdresToString(nearestAdres)));
-  }, [clickPointInfo, marker]);
-
   const flyTo = useCallback(
     location => {
       if (mapInstance) {
         const currentZoom = mapInstance.getZoom();
         mapInstance.flyTo(location, currentZoom < 11 ? 11 : currentZoom);
-        marker?.setOpacity(1);
       }
     },
-    [mapInstance, marker],
+    [mapInstance],
   );
 
   useEffect(() => {
     if (!markerLocation) return;
-    marker?.setLatLng(markerLocation);
     flyTo(markerLocation);
     setMarkerLocation(markerLocation);
   }, [markerLocation]);
@@ -97,7 +86,6 @@ const Geocoder = ({ marker, clickPointInfo, placeholder, getSuggestions, getAddr
       case 27:
         dispatch(searchTermChanged(''));
         dispatch(clearSearchResults());
-        marker?.setOpacity(0);
         break;
 
       // Enter
@@ -120,9 +108,6 @@ const Geocoder = ({ marker, clickPointInfo, placeholder, getSuggestions, getAddr
 
   const handleOnChange = (value: any): void => {
     dispatch(searchTermChanged(value));
-    if (value === '') {
-      marker?.setOpacity(0);
-    }
   };
 
   return (
