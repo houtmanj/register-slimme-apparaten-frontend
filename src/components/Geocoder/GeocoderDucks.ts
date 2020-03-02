@@ -44,13 +44,13 @@ export const initialState: GeocoderState = {
   searchMode: true,
 };
 
-export const reducer = (state: any, action: ActionType<any>) => {
+export const reducer = (state: any = initialState, action: ActionType<any>) => {
   switch (action.type) {
     case SEARCH_TERM_CHANGED:
       return {
         ...state,
         term: action.payload,
-        indeobjectobjectx: -1,
+        index: -1,
         results: [],
         searchMode: true,
       };
